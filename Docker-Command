@@ -1,0 +1,46 @@
+token password:
+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
+
+docker network create catalog-network
+
+docker run -d \
+    --name config-service \
+    --network catalog-network \
+    -p 8888:8888 \
+    config-service
+
+docker run -d \
+	--name polar-postgres \
+	--network catalog-network \
+	-e POSTGRES_USER=user \
+	-e POSTGRES_PASSWORD=password \
+	-e POSTGRES_DB=polardb_catalog \
+	-p 5432:5432 \
+	postgres
+
+
+docker run -d \
+    --name catalog-service \
+    --network catalog-network \
+    -p 9090:9090 \
+    -e SPRING_PROFILES_ACTIVE=testdata \
+    catalog-service
+
+docker run -d \
+    --name catalog-service \
+    --network catalog-network \
+    -p 9090:9090 \
+    -e CONFIG_URL=http://config-service:8888 \
+    -e DATASOURCE_URL=jdbc:postgresql://polar-postgres:5432/polardb_catalog \
+    -e DATABASE_USER=user \
+    -e DATABASE_PASSWORD=password \
+    -e SPRING_PROFILES_ACTIVE=testdata \
+    catalog-service
+
+docker rm -f catalog-service polar-postgres config-service
+
+docker rm -fv config-service
+docker rm -fv catalog-service
+docker rm -fv polar-postgres
+
+docker network rm catalog-network
