@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-22.04 # 우분투 22.04에서 잡을 수행
     permissions:
       contents: read # 현재 깃 저장소를 체크아웃하기 위한 권한
-      package: write # 깃허브 컨테이너 저장소로 이미지를 업로드하기 위한 권한
+      packages: write # 깃허브 컨테이너 저장소로 이미지를 업로드하기 위한 권한
       security-events: write # 깃허브로 보안 이벤트를 제출하기 위한 권한
     steps:
       - name: Checkout source code
