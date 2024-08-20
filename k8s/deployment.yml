@@ -1,0 +1,35 @@
+apiVersion: apps/v1  # 배포 객체에 대한 API 버전
+kind: Deployment     # 생성할 객체의 유형
+metadata:
+  name: catalog-service  # 배포의 이름
+  labels:                # 배포에 추가할 레이블의 집합
+    app: catalog-service  # 이 배포는 "app=catalog-service" 라는 레이블을 갖는다.
+spec:
+  selector:                   # 확장할 파드를 선택하기 위해 사용할 레이블을 정의
+    matchLabels:
+      app: catalog-service
+  template:              # 파드 생성을 위한 탬플릿
+    metadata:
+      labels:            # 파드 객체에 추가되는 레이블, 레이블은 셀렉터로 사용하는 것과 일치해야 한다.
+        app: catalog-service
+    spec:
+      containers:
+        - name: catalog-service
+          image: catalog-service        # 컨테이너를 실행하기 위해 사용할 이미지, 태그가 저장되지 않으면 latest가 암묵적으로 사용된다.
+          imagePullPolicy: IfNotPresent # 이미지가 로컬에 없는 경우에만 컨테이너 저장소에서 이미지를 다운로드
+                                        # 받는 것을 쿠버네티스에게 지시한다.
+          ports:
+            - containerPort: 9090
+          env:                          # 파드로 전달되는 환경 변수의 목록
+            - name: BPL_JVM_THREAD_COUNT
+              value: "50"
+            - name: CONFIG_URL
+              value: http://config-service:8888
+            - name: DATASOURCE_URL
+              value: jdbc:postgresql://polar-postgres:5432/polardb_catalog
+            - name: DATABASE_USER
+              value: user
+            - name: DATABASE_PASSWORD
+              value: password
+            - name: SPRING_PROFILES_ACTIVE
+              value: testdata
