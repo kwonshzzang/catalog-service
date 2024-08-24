@@ -12,4 +12,4 @@ custom_build(
 k8s_yaml(['k8s/deployment.yml', 'k8s/service.yml'])
 
 # 관리
-k8s_resource('catalog-service', port_forwards=['9090'])
+k8s_resource('catalog-service', port_forwards=['9001'])

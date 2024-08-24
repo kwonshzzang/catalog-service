@@ -11,4 +11,4 @@ spec:
   ports:
     - protocol: TCP       # 서비스가 사용할 네트워크 프로토콜
       port: 80            # 서비스가 노출한 포트
-      targetPort: 9090    # 서비스의 대상이 되는 파드가 노출할 포트
+      targetPort: 9001    # 서비스의 대상이 되는 파드가 노출할 포트

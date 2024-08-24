@@ -29,7 +29,7 @@ spring:
       maximum-pool-size: 5
 
 server:
-  port: 9090
+  port: 9001
   shutdown: graceful   # 우아한 종료 활성화
   tomcat:
     connection-timeout: 2s
