@@ -12,6 +12,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String getGreeting() {
+        System.out.println(polarProperties.getConfigServiceUri());
 //        return "도서 카탈로그에 오신 것을 환영합니다!";
         return polarProperties.getGreeting();
     }
