@@ -1,4 +1,4 @@
-package kr.co.kwonshzzang.catalogservice.controller;
+package kr.co.kwonshzzang.catalogservice.web;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
