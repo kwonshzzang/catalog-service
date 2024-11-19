@@ -2,10 +2,12 @@ package kr.co.kwonshzzang.catalogservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
 //스프링 설정 클래스를 정의하고 컴포넌트 스캔과 스프링 부트 자동 설정을 실행한다.
-
+@ConfigurationPropertiesScan
+//스프링 컨텍스트에 설정 데이터 빈을 로드한다.
 public class CatalogServiceApplication {
 
     /**
