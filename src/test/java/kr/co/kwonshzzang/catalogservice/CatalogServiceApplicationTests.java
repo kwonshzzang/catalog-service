@@ -28,7 +28,7 @@ class CatalogServiceApplicationTests {
 
     @Test
     void whenPostRequestThenBookCreated() {
-        var expectedBook = new Book("1231231231", "Title", "Author", 9.90);
+        var expectedBook = Book.of("1231231231", "Title", "Author", 9.90);
         webTestClient
                 .post()                     // HTTP POST 요청을 보낸다.
                 .uri("/books")         // "/books" 엔드포인트로 요청을 보낸다.

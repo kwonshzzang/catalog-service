@@ -33,10 +33,12 @@ public class BookService {
                 .map(existingBook -> {
                     //책을 수정할 때 개체 식별자인 ISBN 코드를 제외한 모든 필드를 수정할 수 있다.
                     var bookToUpdate = new Book(
+                            existingBook.id(),  // 기존 책의 식별자를 사용한다.
                             existingBook.isbn(),
                             book.title(),
                             book.author(),
-                            book.price());
+                            book.price(),
+                            existingBook.version()); //기존 책 버전 사용시 업데이트가 성공하면 자동으로 증가한다.
                     return bookRepository.save(bookToUpdate);
                 } )
                 //카탈로그에 존재하지 않는 책을 수정하려고 하면 새로운 책을 만든다.
