@@ -8,7 +8,7 @@ spring:
       uri: http://localhost:8888 # 설정 서버의 URL
       request-connect-timeout: 5000 # 설정 서버에 연결될 때까지 기다리는 시간(밀리초)
       request-read-timeout: 5000    # 설정 서버에서 설정 데이터를 읽을 때까지 기다리는 시간(밀리초)
-      fail-fast: true               # 설정 서버 연결 실패를 치명적 오류로 인식
+      fail-fast: false              # 설정 서버 연결 실패를 치명적 오류로 인식
       retry:
         max-attempts: 6             # 시도의 최대 횟수
         initial-interval: 1000      # 최초 재시도 지연 시간(밀리초)
@@ -22,6 +22,9 @@ spring:
     hikari:
       connection-timeout: 2000 # 풀에서 연결 객체를 얻기 위해 기다려야 하는 최대시간(밀리초)
       maximum-pool-size: 5     # 히카리 CP가 풀에 최대한으로 유지할 수 있는 연결 객체의 수
+  sql:                         # SQL 스크립트(schema.sql)에서 데이터베이스 초기화
+    init:
+      mode: always
 
 server:
   port: 9001

@@ -4,8 +4,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Version;
+
+import java.time.Instant;
 
 /**
  * 도메인 모델은 불가변 객체인 레코드로 구현된다.
@@ -38,13 +42,19 @@ public record Book(
         @Positive(message = "The book price must be greater than zero.")
         Double price,
 
+        @CreatedDate  //엔티티가 생성된 때
+        Instant createdDate,
+
+        @LastModifiedDate  //엔티티가 마지막으로 수정된 때
+        Instant lastModifiedDate,
+
         @Version  // 낙관적인 잠금(optimistic locking)을 위해 사용되는 엔티티 버전번호
         int version
 ) {
         public static Book of(
                 String isbn, String title, String author, Double price
         ) {
-                return new Book(null, isbn, title, author, price, 0);
+                return new Book(null, isbn, title, author, price, null, null, 0);
                 // id가 널이고 버전이 0이면 새로운 엔티티로 인식한다.
         }
 }
