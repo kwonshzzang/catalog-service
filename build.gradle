@@ -31,6 +31,11 @@ ext {
     set('springCloudVersion', "2023.0.3")  // 사용할 스프링 클라우드 버전 정의
 }
 
+
+ext {
+    set('testcontainersVersion', "1.20.4")  // 사용할 테스트컨테이너 버전 정의
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -38,6 +43,7 @@ dependencies {
     implementation 'org.springframework.retry:spring-retry'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.flywaydb:flyway-database-postgresql'
     runtimeOnly 'org.postgresql:postgresql'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -45,6 +51,7 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
+    testImplementation 'org.testcontainers:postgresql' //PostgreSQL 데이터베이스에 대한 컨테이너 관리 기능을 제공한다.
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
@@ -52,6 +59,13 @@ dependencyManagement {
     imports {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
         // 스프링 클라우드 의존성 관리를 위한 BOM
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+        // 테스트컨테이너 의존성 관리를 위한 BOM
     }
 }
 

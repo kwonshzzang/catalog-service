@@ -4,6 +4,7 @@ import kr.co.kwonshzzang.catalogservice.domain.Book;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,6 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 )
 // 스프링 부트 애플리케이션을 테스트하기 위한 셋업 제공
 // 완전한 스프링 웹 애플리케이션 컨텍스트와 임의의 포트를 듣는 서블릿 컨테이너를 로드한다.
+@ActiveProfiles("integration")
+// application-integration.yml에서 설정을 로드하기 위해 integration 프로파일을 활성화한다.
 class CatalogServiceApplicationTests {
 
     @Autowired
