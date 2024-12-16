@@ -42,6 +42,8 @@ public record Book(
         @Positive(message = "The book price must be greater than zero.")
         Double price,
 
+        String publisher,
+
         @CreatedDate  //엔티티가 생성된 때
         Instant createdDate,
 
@@ -52,9 +54,9 @@ public record Book(
         int version
 ) {
         public static Book of(
-                String isbn, String title, String author, Double price
-        ) {
-                return new Book(null, isbn, title, author, price, null, null, 0);
+                String isbn, String title, String author, Double price, String publisher)
+         {
+                return new Book(null, isbn, title, author, price, publisher, null, null,0);
                 // id가 널이고 버전이 0이면 새로운 엔티티로 인식한다.
         }
 }

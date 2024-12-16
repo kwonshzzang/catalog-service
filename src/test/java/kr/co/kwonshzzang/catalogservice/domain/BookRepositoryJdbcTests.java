@@ -30,7 +30,7 @@ class BookRepositoryJdbcTests {
     void findBookByIsbnWhenExisting() {
         //given
         var bookIsbn ="1234561237";
-        var book = Book.of(bookIsbn, "Title", "Author", 12.90);
+        var book = Book.of(bookIsbn, "Title", "Author", 12.90, "Polarsophia");
         jdbcAggregateTemplate.insert(book); //jdbcAggregateTemplate은 테스트에 필요한 데이터를 준비하는 데 사용한다.
         //when
         Optional<Book> actualBook = bookRepository.findByIsbn(bookIsbn);
