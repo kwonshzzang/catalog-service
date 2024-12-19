@@ -9,6 +9,10 @@ COPY ${JAR_FILE} catalog-service.jar
 RUN java -Djarmode=layertools -jar catalog-service.jar extract
 
 FROM eclipse-temurin:17
+# 'spring'이라는 이름의 유저를 만든다.
+RUN useradd spring
+# 'spring'을 현재 유저로 설정한다.
+USER spring
 WORKDIR workspace
 # 첫 번째 단계에서 추출한 JAR 계층을 두 번째 단계로 복사한다.
 COPY --from=builder workspace/dependencies/ ./
