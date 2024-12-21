@@ -5,7 +5,7 @@ spring:
     import: "optional:configserver:" # 가능하면 컨피그 서버에서 설정 데이터를 가져온다.
   cloud:
     config:
-      uri: ${SPRING_CLOUD_CONFIG_URI} # 설정 서버의 URL
+      uri: http://localhost:8888    # 설정 서버의 URL
       request-connect-timeout: 5000 # 설정 서버에 연결될 때까지 기다리는 시간(밀리초)
       request-read-timeout: 5000    # 설정 서버에서 설정 데이터를 읽을 때까지 기다리는 시간(밀리초)
       fail-fast: true               # 설정 서버 연결 실패를 치명적 오류로 인식
