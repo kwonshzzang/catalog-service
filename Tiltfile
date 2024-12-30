@@ -9,8 +9,7 @@ custom_build(
 )
 
 # 배포
-k8s_yaml(['k8s/deployment_catalog_service.yml', 'k8s/deployment_config_service.yml',  'k8s/service.yml'])
+k8s_yaml(['k8s/deployment.yml', 'k8s/service.yml'])
 
 # 관리
 k8s_resource('catalog-service', port_forwards=['9001'])
-k8s_resource('config-service', port_forwards=['8888'])
