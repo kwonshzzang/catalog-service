@@ -39,6 +39,13 @@ jobs:
         run: |
           chmod +x gradlew # 윈도우 호환성을 해결하면서 그래들 래퍼 스크립트를 실행 가능하게 만든다
           ./gradlew build  # 코드베이스를 컴파일하고 단위 및 통합 테스트를 실행하는 그래들 빌드 작업을 수행한다.
+      - name: Validate Kubernetes manifests
+        uses: stefanprodan/kube-tools@v1 # 쿠버네티스를 위한 유용한 도구를 설치할 수 있는 액션
+        with:
+          kubectl: 1.24.3  # 쿠버네티스 CLI를 설치힌다.
+          kubeval: 0.16.1  # 큐비발을 설치한다.
+          command: |
+            kubeval --strict -d k8s # k8s 폴더에 있는 쿠버네티스 매니페스트의 유효성 검사를 위해 큐비발을 사용한다. 
 
   package: # 잡의 고유한 식별자
     name: Package and Publish
