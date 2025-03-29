@@ -1,0 +1,4 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:/// # 테스트컨테이너의 PostgreSQL 모듈을 지정한다.
+                                # jdbc:tc:postgresql:14.4:/// '14.4'는 사용할 PostgreSQL 버전이다.

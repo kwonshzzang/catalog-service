@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: catalog-service # 설정 서버에서 설정을 필터링하는데 사용하는 애플리케이션 이름
+  lifecycle:
+    timeout-per-shutdown-phase: 15s  # 15초의 종료 기간을 둔다.
+  config:
+    import: "optional:configserver:" # 가능하면 컨피그 서버에서 설정 데이터를 가져온다.
+  cloud:
+    config:
+      uri: http://localhost:8888    # 설정 서버의 URL
+      request-connect-timeout: 5000 # 설정 서버에 연결될 때까지 기다리는 시간(밀리초)
+      request-read-timeout: 5000    # 설정 서버에서 설정 데이터를 읽을 때까지 기다리는 시간(밀리초)
+      fail-fast: false              # 설정 서버 연결 실패를 치명적 오류로 인식
+      retry:
+        max-attempts: 6             # 시도의 최대 횟수
+        initial-interval: 1000      # 최초 재시도 지연 시간(밀리초)
+        max-interval: 2000          # 재시도 지연 최대시간(밀리초)
+        multiplier: 1.1             # 지연시간 계산 승수
+  datasource:                       # 주어진 데이터베이스에 액세스 권한을 가지고 있는 유저의 크리덴셜과 연결을 원하는
+                                    # 데이터베이스에 대한 JDBC URL
+    username: user
+    password: password
+    url: jdbc:postgresql://localhost:5432/polardb_catalog
+    hikari:
+      connection-timeout: 2000 # 풀에서 연결 객체를 얻기 위해 기다려야 하는 최대시간(밀리초)
+      maximum-pool-size: 5     # 히카리 CP가 풀에 최대한으로 유지할 수 있는 연결 객체의 수
+#  sql:                         # SQL 스크립트(schema.sql)에서 데이터베이스 초기화
+#    init:
+#      mode: always
+
+server:
+  port: 9001
+  shutdown: graceful  # 우아한 종료 활성화
+  tomcat:
+    connection-timeout: 2s
+    keep-alive-timeout: 15s
+    threads:
+      max: 50
+      min-spare: 5
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh # HTTP를 통해 /actuator/refresh 앤드포인트를 노출한다.
+
+polar:
+  greeting: Welcome to the local book catalog!
